@@ -6,7 +6,7 @@ const mysql = require('mysql');
 
 const options = {
     user: 'root',
-    password: 'Neela567',
+    password: 'neela567',
     database:'schools'
 };
 
