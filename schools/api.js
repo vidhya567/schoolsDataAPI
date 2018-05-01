@@ -22,6 +22,18 @@ router.get('/search', (req, res, next) => {
     });
 });
 
+router.get('/data', () => {
+    const schoolId = req.query.schoolId;
+    console.log("Searching for Schooldata",schoolId);
+    dbImpl.getSchoolDataFromSchoolId(schoolId, (err, result) => {
+        if (err) {
+            next(err);
+        }
+        res.json(result);
+    });
+});
+
+
 router.use((err, req, res, next) => {
     err.response = {
         message: err.message,

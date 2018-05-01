@@ -25,6 +25,19 @@ function search (searchTerm, cb) {
     )
 }
 
+function getSchoolDataFromSchoolId (schoolId, cb) {
+    connection.query(
+        "SELECT * FROM schools WHERE schoolID = "+schoolId,
+        (err, result) => {
+            if (err) {
+                cb(err);
+                return;
+            }
+            cb(null, result);
+        }
+    )
+}
+
 function endConnection () {
     console.log(" Ending Connection to DB");
     connection.end();
@@ -32,5 +45,6 @@ function endConnection () {
 
 module.exports = {
     search: search,
+    getSchoolDataFromSchoolId: getSchoolDataFromSchoolId,
     endConnection: endConnection
 }
