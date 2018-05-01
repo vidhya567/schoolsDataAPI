@@ -22,7 +22,7 @@ router.get('/search', (req, res, next) => {
     });
 });
 
-router.get('/data', () => {
+router.get('/data', (req, res, next) => {
     const schoolId = req.query.schoolId;
     console.log("Searching for Schooldata",schoolId);
     dbImpl.getSchoolDataFromSchoolId(schoolId, (err, result) => {
