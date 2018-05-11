@@ -4,6 +4,13 @@ const path = require('path');
 const express = require('express');
 const intendedPort = 8900;
 const app = express();
+const https = require('https');
+var fs = require('fs');
+ 
+var options = {
+  key: fs.readFileSync('privateKey.key'),
+  cert: fs.readFileSync('certificate.crt')
+};
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -31,10 +38,7 @@ app.use((err, req, res, next) => {
 
 if (module === require.main) {
     // Start the server
-    const server = app.listen(intendedPort, () => {
-        const port = server.address().port;
-        console.log(`App listening on port ${port}`);
-    });
+   https.createServer(options, app).listen(8443);
 }
 
 module.exports = app;
