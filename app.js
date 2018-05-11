@@ -36,9 +36,7 @@ app.use((err, req, res, next) => {
     res.status(500).send(err.response || 'Something Wrong in Call to Schools API');
 });
 
-if (module === require.main) {
-    // Start the server
-   https.createServer(options, app).listen(8443);
-}
 
-module.exports = app;
+https.createServer(options, app).listen(8443);
+
+
