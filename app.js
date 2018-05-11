@@ -37,6 +37,8 @@ app.use((err, req, res, next) => {
 });
 
 
-https.createServer(options, app).listen(8443);
+https.createServer(options, app).listen(8443, () => {
+    console.log('app is running');
+});
 
 
