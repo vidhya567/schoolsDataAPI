@@ -12,6 +12,12 @@ var options = {
   cert: fs.readFileSync('certificate.crt')
 };
 
+
+https.createServer(options, app).listen(8443, () => {
+    console.log('app is running');
+});
+
+
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -21,8 +27,8 @@ app.use(function(req, res, next) {
 app.use('/schools', require('./schools/api'));
 
 app.get('/', (req, res) => {
-   console.log("GET");
-   res.redirect('/schools');
+    console.log("GET");
+    res.redirect('/schools');
 });
 
 // Basic 404 handler
@@ -34,11 +40,6 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
     console.error(err);
     res.status(500).send(err.response || 'Something Wrong in Call to Schools API');
-});
-
-
-https.createServer(options, app).listen(8443, () => {
-    console.log('app is running');
 });
 
 
